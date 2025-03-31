@@ -127,7 +127,37 @@
     }
   }
 
-  // 5.  处理页眉
+  // 5. 页眉设置
+  // 5. Header settings
+  set page(
+    header: context {
+      if display-header {
+        // Reset footnote counter if needed
+        if reset-footnote {
+          counter(footnote).update(0)
+        }
+        let header-text = [重庆理工大学毕业设计（论文）]
+        let title = if type(info.title) == array {
+          info.title.join(" ")
+        } else {
+          info.title
+        }
+        grid(
+          columns: (1fr, 1fr),
+          text(font: fonts.宋体, size: 字号.五号, header-text),
+          align(right, text(font: fonts.宋体, size: 字号.五号, title))
+        )
+        v(-0.8em)
+        line(length: 100%, stroke: stroke-width)
+      } else {
+        if reset-footnote {
+          counter(footnote).update(0)
+        }
+      }
+    }
+  )
+
+  // 6.  处理页眉
   set page(..(if display-header {
     (
       header: context {
@@ -136,9 +166,9 @@
           counter(footnote).update(0)
         }
         let loc = here()
-        // 5.1 获取当前页面的一级标题
+        // 6.1 获取当前页面的一级标题
         let cur-heading = current-heading(level: 1)
-        // 5.2 如果当前页面没有一级标题，则渲染页眉
+        // 6.2 如果当前页面没有一级标题，则渲染页眉
         if not skip-on-first-level or cur-heading == none {
           if header-render == auto {
             // 一级标题和二级标题

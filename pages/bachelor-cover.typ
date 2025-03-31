@@ -1,8 +1,10 @@
 #import "../utils/datetime-display.typ": datetime-display
 #import "../utils/style.typ": 字号, 字体
 
+
 // 本科生封面
 #let bachelor-cover(
+
   // documentclass 传入的参数
   anonymous: false,
   twoside: false,
@@ -21,11 +23,13 @@
   bold-info-keys: ("title",),
   bold-level: "bold",
   datetime-display: datetime-display,
+
 ) = {
+
   // 1.  默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: ("基于 Typst 的", "重庆理工大学学位论文"),
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
@@ -60,7 +64,6 @@
       ),
     )
   }
-
   let info-value(key, body) = {
     set align(center)
     rect(
@@ -70,13 +73,12 @@
       text(
         font: fonts.at(info-value-font, default: "宋体"),
         size: 字号.三号,
-        weight: if key in bold-info-keys { bold-level } else { "regular" },
+        weight: if (key in bold-info-keys) { bold-level } else { "regular" },
         bottom-edge: "descender",
         body,
       ),
     )
   }
-
   let info-long-value(key, body) = {
     grid.cell(colspan: 3,
       info-value(
@@ -89,7 +91,6 @@
       )
     )
   }
-
   let info-short-value(key, body) = {
     info-value(
       key,
@@ -101,34 +102,34 @@
     )
   }
   
-
   // 4.  正式渲染
-  
   pagebreak(weak: true, to: if twoside { "odd" })
 
-  // 居中对齐
+  // 5.居中对齐
   set align(center)
 
-  // 匿名化处理去掉封面标识
+  // 6.匿名化处理去掉封面标识
   if anonymous {
     v(52pt)
   } else {
     // 封面图标
+
     v(6pt)
-    image("../assets/vi/nju-emblem.svg", width: 2.38cm)
+    
+    image("../logos/3.svg", width: 14cm)
+
     v(22pt)
-    // 调整一下左边的间距
-    pad(image("../assets/vi/nju-name.svg", width: 10.5cm), left: 0.4cm)
+
     v(2pt)
   }
 
-  // 将中文之间的空格间隙从 0.25 em 调整到 0.5 em
-  text(size: 字号.一号, font: fonts.宋体, spacing: 200%, weight: "bold")[本 科 毕 业 论 文]
+  // 7.将中文之间的空格间隙从 0.25 em 调整到 0.5 em
+  text(size: 字号.小初, font: fonts.黑体, spacing: 200%, weight: "bold")[本 科 毕 业 论 文]
   
   if anonymous {
-    v(155pt)
+    v(310pt)
   } else {
-    v(67pt)
+    v(134pt)
   }
 
   block(width: 318pt, grid(

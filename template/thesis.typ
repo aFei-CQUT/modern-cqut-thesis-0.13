@@ -1,4 +1,4 @@
-#import "@preview/modern-nju-thesis:0.4.0": documentclass
+#import "../lib.typ":*
 
 // 你首先应该安装 https://github.com/nju-lug/modern-nju-thesis/tree/main/fonts/FangZheng 里的所有字体，
 // 如果是 Web App 上编辑，你应该手动上传这些字体文件，否则不能正常使用「楷体」和「仿宋」，导致显示错误。
@@ -18,7 +18,7 @@
   // 你可以自定义字体消除警告，先英文字体后中文字体，应传入「宋体」、「黑体」、「楷体」、「仿宋」、「等宽」
   // fonts: (楷体: (name: "Times New Roman", covers: "latin-in-cjk"), "FZKai-Z03S")),
   info: (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: ("基于 Typst 的", "重庆理工大学学位论文"),
     title-en: "My Title in English",
     grade: "20XX",
     student-id: "1234567890",
@@ -35,17 +35,20 @@
     submit-date: datetime.today(),
   ),
   // 参考文献源
-  bibliography: bibliography.with("ref.bib"),
+  bibliography: bibliography.with("thesis.bib"),
 )
 
 // 文稿设置
 #show: doc
 
-// 字体展示测试页
-// #fonts-display-page()
+// 一个别的引用样式，打印时应该注释掉
+#show cite: spcific-cite
 
 // 封面页
 #cover()
+
+// 字体展示测试页
+#fonts-display-page()
 
 // 声明页
 #decl-page()
@@ -82,10 +85,10 @@
 #show: mainmatter
 
 // 符号表
-// #notation[
-//   / DFT: 密度泛函理论 (Density functional theory)
-//   / DMRG: 密度矩阵重正化群密度矩阵重正化群密度矩阵重正化群 (Density-Matrix Reformation-Group)
-// ]
+#notation[
+  / DFT: 密度泛函理论 (Density functional theory)
+  / DMRG: 密度矩阵重正化群密度矩阵重正化群密度矩阵重正化群 (Density-Matrix Reformation-Group)
+]
 
 = 导　论
 
@@ -142,7 +145,7 @@
 ]))
 
 #figure(
-  image("images/nju-emblem.svg", width: 20%),
+  image("images/1.svg", width: 20%),
   caption: [图片测试],
 ) <nju-logo>
 
@@ -165,6 +168,79 @@ $ y = integral_1^2 x^2 dif x $ <->
 
 $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 
+== 化学方程式
+
+氧化还原反应：
+
+$ #cb("2KMnO4 = K2MnO4 + MnO2 + O2>", a: $Delta$) $
+
+#figure(
+    table(
+      columns: 2,
+      stroke: none,
+
+      table.hline(),
+
+
+      [$ #cb("N2 + 3H2 <=> 2NH3", a: "高温加热", b: "催化剂") $], [合成氨反应],
+      [$ #cb("2H2O <=> 2H2 + O2", a: "电解", b: "电流") $], [水的电解反应],
+      [$ #cb("H2O + D2O -> 2HDO", a: "同位素交换反应") $], [氘水反应],
+      [$ #cb("BaCl2 + Na2SO4 -> BaSO4(s)< + 2NaCl", a: "沉淀反应") $], [沉淀反应],
+
+      table.hline()
+    ),
+    caption: [化学方程式示例],
+  ) <chem-equa>
+
+
+== 定　理
+
+=== 定理环境
+#show: thmrules.with(qed-symbol: $square$)
+
+#theorem("Euclid")[
+  There are infinitely many primes.You can find them all if you try hard enough.datetime. Each prime has a unique factorization into a product of primes. I am exhausted of primes. What am I doing?  I am thinking about primes. What is prime?
+] 
+
+// 分页
+#pagebreak()
+
+#definition[
+  A natural number is called a #highlight[_prime number_] if it is greater
+  than 1 and cannot be written as the product of two smaller natural numbers.
+]
+
+#example[
+  The numbers $2$, $3$, and $17$ are prime.
+  @cor_largest_prime shows that this list is not exhaustive!
+]
+
+#proof[
+  Suppose to the contrary that $p_1, p_2, dots, p_n$ is a finite enumeration
+  of all primes. Set $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
+  it cannot be prime. Thus, some prime factor $p_j$ divides $P + 1$.  Since
+  $p_j$ also divides $P$, it must divide the difference $(P + 1) - P = 1$, a
+  contradiction.
+]
+
+#corollary[
+  There is no largest prime number.
+] <cor_largest_prime>
+
+#corollary[
+  There are infinitely many composite numbers.
+]
+
+#theorem[
+  There are arbitrarily long stretches of composite numbers.
+]
+
+#proof[
+  For any $n > 2$, consider $
+    n! + 2, quad n! + 3, quad ..., quad n! + n 
+  $
+]
+
 == 参考文献
 
 可以像这样引用参考文献：图书#[@蒋有绪1998]和会议#[@中国力学学会1990]。
@@ -178,9 +254,8 @@ $ F_n = floor(1 / sqrt(5) phi.alt^n) $
   def add(x, y):
     return x + y
   ```,
-  caption:[代码块],
+  caption:[代码块范例],
 ) <code>
-
 
 = 正　文
 
@@ -189,7 +264,6 @@ $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 === 正文子子标题
 
 正文内容
-
 
 // 手动分页
 #if twoside {
@@ -201,15 +275,14 @@ $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 #bilingual-bibliography(full: true)
 
 // 致谢
-#acknowledgement[
-  感谢 NJU-LUG，感谢 NJUThesis LaTeX 模板。
+#acknowledgement[ 
+  我要感谢...
 ]
 
 // 手动分页
 #if twoside {
   pagebreak() + " "
 }
-
 
 // 附录
 #show: appendix
@@ -223,6 +296,6 @@ $ F_n = floor(1 / sqrt(5) phi.alt^n) $
 附录内容，这里也可以加入图片，例如@fig:appendix-img。
 
 #figure(
-  image("images/nju-emblem.svg", width: 20%),
+  image("images/1.svg", width: 20%),
   caption: [图片测试],
 ) <appendix-img>

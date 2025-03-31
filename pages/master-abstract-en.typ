@@ -89,7 +89,7 @@
 
       #v(8pt)
 
-      #double-underline((if not anonymous { "南京大学" }) + "研究生毕业论文英文摘要首页用纸")
+      #double-underline((if not anonymous { "重庆理工大学" }) + "研究生毕业论文英文摘要首页用纸")
 
       #v(-5pt)
     ]

@@ -1,7 +1,4 @@
-// 南京大学学位论文模板 modern-nju-thesis
-// Author: https://github.com/OrangeX4
-// Repo: https://github.com/nju-lug/modern-nju-thesis
-// 在线模板可能不会更新得很及时，如果需要最新版本，请关注 Repo
+// 重庆理工大学学位论文模板 modern-cqut-thesis
 
 #import "layouts/doc.typ": doc
 #import "layouts/preface.typ": preface
@@ -27,6 +24,9 @@
 #import "utils/custom-heading.typ": heading-display, active-heading, current-heading
 #import "@preview/i-figured:0.2.4": show-figure, show-equation
 #import "utils/style.typ": 字体, 字号
+#import "utils/theorem.typ": *
+#import "utils/chemistry.typ": ca, cb
+#import "utils/cite-style.typ": spcific-cite
 
 #let indent = h(2em)
 
@@ -44,8 +44,8 @@
   // 默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京大学学位论文"),
-    title-en: "NJU Thesis Template for Typst",
+    title: ("基于 Typst 的", "重庆理工大学学位论文"),
+    title-en: "CQUT Thesis Template for Typst",
     grade: "20XX",
     student-id: "1234567890",
     author: "张三",
@@ -70,7 +70,7 @@
     clc: "O643.12",
     udc: "544.4",
     secret-level: "公开",
-    supervisor-contact: "南京大学 江苏省南京市栖霞区仙林大道163号",
+    supervisor-contact: "重庆理工大学 重庆市巴南区红光大道77号",
     email: "xyz@smail.nju.edu.cn",
     school-code: "10284",
     degree: auto,

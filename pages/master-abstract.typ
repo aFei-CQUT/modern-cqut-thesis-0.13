@@ -33,7 +33,7 @@
   // 1.  默认参数
   fonts = 字体 + fonts
   info = (
-    title: ("基于 Typst 的", "南京大学学位论文"),
+    title: ("基于 Typst 的", "重庆理工大学学位论文"),
     author: "张三",
     grade: "20XX",
     department: "某学院",
@@ -90,7 +90,7 @@
 
       #v(8pt)
 
-      #double-underline((if not anonymous { "南京大学" }) + "研究生毕业论文中文摘要首页用纸")
+      #double-underline((if not anonymous { "重庆理工大学" }) + "研究生毕业论文中文摘要首页用纸")
 
       #v(-5pt)
     ]
